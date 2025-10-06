@@ -1,1 +1,8 @@
 % Create a solution for Exercise 4.3, page 73
+% KB1: naive
+fof(penguin_tweety, axiom, penguin(tweety)).
+fof(penguin_implies_bird, axiom, ![X] : ( penguin(X) => bird(X) )).
+fof(bird_implies_fly, axiom, ![X] : ( bird(X) => fly(X) )).
+
+% Conjecture: can Tweety fly?
+fof(conj_fly_tweety, conjecture, fly(tweety)).
