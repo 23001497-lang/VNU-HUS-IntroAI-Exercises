@@ -1,1 +1,9 @@
 % Create a solution for Exercise 3.9(b), page 64
+fof(clause1, axiom,
+    ![X] : ( ~ shaves(barber,X) | ~ shaves(X,X) )
+).
+
+fof(clause2, axiom,
+    ![X] : ( shaves(barber,X) | shaves(X,X) )
+).
+fof(goal, conjecture, $false).

@@ -1,1 +1,39 @@
 % Create a solution for Exercise 3.9(c), page 64
+% a, one-place predicate
+fof(def_male, axiom,
+    ![X] : ( male(X) <=> ~ female(X) )
+).
+% b, two-place predicates father and mother
+fof(def_father, axiom,
+    ![F,C] : ( father(F,C) <=> ?[M] : ( child(C,F,M) & male(F) ) )
+).
+
+fof(def_mother, axiom,
+    ![M,C] : ( mother(M,C) <=> ?[F] : ( child(C,F,M) & female(M) ) )
+).
+% c,two-place predicate siblings(x,y)
+fof(def_siblings, axiom,
+    ![X,Y] : ( siblings(X,Y) <=> ( X != Y & ?[F,M] : ( child(X,F,M) & child(Y,F,M) ) ) )
+).
+% d, predicate parents(x,y,z)
+fof(def_parents, axiom,
+    ![X,Y,Z] : ( parents(X,Y,Z) <=> ( child(Z,X,Y) & male(X) & female(Y) ) )
+).
+% e, predicate uncle(x,y)
+fof(def_uncle, axiom,
+    ![X,Y] : ( uncle(X,Y) <=>
+        ( male(X) & ?[P] : ( ( father(P,Y) | mother(P,Y) ) & siblings(X,P) ) )
+    )
+).
+% f, two-place predicate ancestor(x,y)
+fof(def_parent, axiom,
+    ![P,C] : ( parent(P,C) <=> ( father(P,C) | mother(P,C) ) )
+).
+
+fof(ancestor_base, axiom,
+    ![X,Y] : ( parent(X,Y) => ancestor(X,Y) )
+).
+
+fof(ancestor_step, axiom,
+    ![X,Z,Y] : ( ( ancestor(X,Z) & parent(Z,Y) ) => ancestor(X,Y) )
+).

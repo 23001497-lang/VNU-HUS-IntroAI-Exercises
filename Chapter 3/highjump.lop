@@ -1,1 +1,9 @@
 % Create a solution for Exercise 3.9(a), page 64
+fof(c1, axiom, (~ a | ~ b)).    % (¬A ∨ ¬B)
+fof(c2, axiom, (a | b)).        % (A ∨ B)
+fof(c3, axiom, (~ b | ~ c)).    % (¬B ∨ ¬C)
+fof(c4, axiom, (b | c)).        % (B ∨ C)
+fof(c5, axiom, (~ c | ~ a)).    % (¬C ∨ ¬A)
+fof(c6, axiom, (c | a)).        % (C ∨ A)
+
+fof(conj, conjecture, $false).
