@@ -1,1 +1,34 @@
 % Create a solution for Exercise 5.4(b), page 88 
+
+% Facts (các sự kiện)
+
+parent(john, mary).
+parent(mary, susan).
+parent(susan, tom).
+parent(tom, lisa).
+
+
+% Rules (các quy tắc)
+
+descendant(X, Y) :- parent(X, Y).
+descendant(X, Y) :- parent(X, Z), descendant(Z, Y).
+
+
+% Save all descendants to file .lop
+
+save_descendants :-
+    tell('output.lop'),                 % mở file output.lop để ghi
+    descendant(X, Y),
+    write('descendant('), 
+    write(X), 
+    write(', '), 
+    write(Y), 
+    writeln(').'),
+    fail.                               % buộc Prolog tìm thêm kết quả khác
+save_descendants :-
+    told.                               % đóng file sau khi ghi xong
+
+
+% Run:
+% ?- save_descendants.
+

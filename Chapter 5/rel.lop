@@ -1,1 +1,30 @@
 % Create a solution for Exercise 5.4(a), page 88 
+% Facts (example set; add more facts if you have the full KB)
+child(eve,  oscar, anne).
+child(oscar, clyde, karen).
+child(clyde, mary,  karen).
+
+% child_sym/3: symmetric view of the two parent positions
+child_sym(X,P1,P2) :- child(X,P1,P2).
+child_sym(X,P1,P2) :- child(X,P2,P1).
+
+% descendant/2 with visited accumulator to avoid loops
+descendant(X,Y) :-
+    descendant(X,Y,[X]).
+
+% base cases: direct child (either position)
+descendant(X,Y,_) :- child_sym(X,Y,_), !.
+descendant(X,Y,_) :- child_sym(X,_,Y), !.
+
+% recursive cases: try first parent, then second, avoid revisiting
+descendant(X,Y,Visited) :-
+    child_sym(X, U, V),
+    U \= X,
+    \+ member(U, Visited),
+    descendant(U, Y, [U|Visited]).
+
+descendant(X,Y,Visited) :-
+    child_sym(X, U, V),
+    V \= X,
+    \+ member(V, Visited),
+    descendant(V, Y, [V|Visited]).
