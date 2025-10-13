@@ -1,1 +1,9 @@
 % Create a solution for Exercise 4.3, page 73
+% KB2: naive + penguins cannot fly (inconsistent)
+fof(penguin_tweety, axiom, penguin(tweety)).
+fof(penguin_implies_bird, axiom, ![X] : ( penguin(X) => bird(X) )).
+fof(bird_implies_fly, axiom, ![X] : ( bird(X) => fly(X) )).
+fof(penguin_implies_not_fly, axiom, ![X] : ( penguin(X) => ~fly(X) )).
+
+% Conjectures: both fly(tweety) and ~fly(tweety) can be proved because KB inconsistent
+fof(conj_fly_tweety, conjecture, fly(tweety)).

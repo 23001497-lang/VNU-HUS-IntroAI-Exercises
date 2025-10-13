@@ -1,1 +1,13 @@
 % Create a solution for Exercise 4.3, page 73
+% KB4: KB3 plus a raven Abraxas, but we forget raven != penguin
+fof(raven_abraxas, axiom, raven(abraxas)).
+fof(raven_implies_bird, axiom, ![X] : ( raven(X) => bird(X) )).
+
+fof(penguin_tweety, axiom, penguin(tweety)).
+fof(penguin_implies_bird, axiom, ![X] : ( penguin(X) => bird(X) )).
+fof(bird_except_penguin_implies_fly, axiom,
+    ![X] : ( ( bird(X) & ~penguin(X) ) => fly(X) )).
+fof(penguin_implies_not_fly, axiom, ![X] : ( penguin(X) => ~fly(X) )).
+
+% Conjecture: can we prove fly(abraxas)? (expected: NO, because we don't know ~penguin(abraxas))
+fof(conj_fly_abraxas, conjecture, fly(abraxas)).

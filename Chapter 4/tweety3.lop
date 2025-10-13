@@ -1,1 +1,14 @@
 % Create a solution for Exercise 4.3, page 73
+% KB3: refined rule: birds except penguins can fly
+fof(penguin_tweety, axiom, penguin(tweety)).
+fof(penguin_implies_bird, axiom, ![X] : ( penguin(X) => bird(X) )).
+fof(bird_except_penguin_implies_fly, axiom,
+    ![X] : ( ( bird(X) & ~penguin(X) ) => fly(X) )).
+fof(penguin_implies_not_fly, axiom, ![X] : ( penguin(X) => ~fly(X) )).
+
+% Conjecture: is fly(tweety) derivable? (expected: NO)
+fof(conj_fly_tweety, conjecture, fly(tweety)).
+
+% Conjecture2: is ~fly(tweety) derivable? (expected: YES)
+% Uncomment/use this as separate run
+% fof(conj_not_fly_tweety, conjecture, ~fly(tweety)).
